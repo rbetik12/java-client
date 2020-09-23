@@ -1,7 +1,5 @@
 package io.rbetik12.gui;
 
-import io.rbetik12.models.Coordinates;
-import io.rbetik12.models.MusicBand;
 import io.rbetik12.models.NetAction;
 import io.rbetik12.models.WindowType;
 import io.rbetik12.network.NetworkManager;
@@ -12,8 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
-import static io.rbetik12.gui.MusicBandWindow.getMusicGenre;
 
 public class TableWindow extends JFrame {
     private final int windowWidth = 800;
@@ -32,6 +28,7 @@ public class TableWindow extends JFrame {
             }
         });
 
+        DrawTable();
         DrawCommandsMenu();
 
         pack();
@@ -43,20 +40,8 @@ public class TableWindow extends JFrame {
 
     private void DrawCommandsMenu() {
         JPanel commandsPanel = new JPanel(new FlowLayout());
-        commandsPanel.setMaximumSize(new Dimension(windowWidth / 3, Integer.MAX_VALUE));
-        commandsPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
         commandsPanel.setBackground(Color.decode("#673AB7"));
         add(commandsPanel);
-
-        JButton addElementButton = new JButton("Add");
-        addElementButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                WindowManager.LoadModalWindow(WindowType.MusicBand, NetAction.Add);
-            }
-        });
-        commandsPanel.add(addElementButton);
-
 
         JLabel id = new JLabel("ID");
         id.setAlignmentX(CENTER_ALIGNMENT);
@@ -68,6 +53,15 @@ public class TableWindow extends JFrame {
         idField.setEditable(true);
         idField.setMaximumSize(new Dimension(Integer.MAX_VALUE, idField.getPreferredSize().height));
         commandsPanel.add(idField);
+
+        JButton addElementButton = new JButton("Add");
+        addElementButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                WindowManager.LoadModalWindow(WindowType.MusicBand, NetAction.Add);
+            }
+        });
+        commandsPanel.add(addElementButton);
 
         JButton updateElementButton = new JButton("Update");
         updateElementButton.addActionListener(new ActionListener() {
@@ -131,5 +125,23 @@ public class TableWindow extends JFrame {
             }
         });
         commandsPanel.add(removeLowerButton);
+    }
+
+    private void DrawTable() {
+        JPanel tablePanel = new JPanel();
+        add(tablePanel);
+
+        String[][] data = TableManager.getTable();
+
+        String[] columnNames = {"ID", "Name", "Creation date", "Number of participants", "Genre", "Label"};
+
+        JTable table = new JTable(data, columnNames);
+
+        JScrollPane scrollPane = new JScrollPane(table);
+        add(scrollPane);
+
+        JLabel label = new JLabel("Music bands");
+
+        tablePanel.add(label);
     }
 }

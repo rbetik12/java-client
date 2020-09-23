@@ -54,6 +54,10 @@ public class MusicBand implements Comparable {
         return label;
     }
 
+    public void setCreationDate(ZonedDateTime time) {
+        creationDate = time;
+    }
+
     @Override
     public String toString() {
         return "Id: " +
