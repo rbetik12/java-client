@@ -1,9 +1,7 @@
 package io.rbetik12.gui;
 
-import io.rbetik12.models.Coordinates;
+import io.rbetik12.models.*;
 import io.rbetik12.models.Label;
-import io.rbetik12.models.MusicBand;
-import io.rbetik12.models.MusicGenre;
 import io.rbetik12.network.NetworkManager;
 
 import javax.swing.*;
@@ -14,9 +12,30 @@ import java.awt.event.ActionListener;
 public class MusicBandWindow extends JFrame {
     private final int windowWidth = 300;
     private final int windowHeight = 300;
+    private ActionListener actionListener;
+    private NetAction action;
+    private Object parameter;
 
-    public MusicBandWindow() {
+    public MusicBandWindow(ActionListener actionListener) {
         super("Music band");
+        init();
+        this.actionListener = actionListener;
+    }
+
+    public MusicBandWindow(NetAction action) {
+        super("Music band");
+        init();
+        this.action = action;
+    }
+
+    public MusicBandWindow(NetAction action, Object parameter) {
+        super("Music band");
+        init();
+        this.action = action;
+        this.parameter = parameter;
+    }
+
+    private void init() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 
@@ -102,23 +121,46 @@ public class MusicBandWindow extends JFrame {
         sendButton.setAlignmentX(CENTER_ALIGNMENT);
         add(sendButton);
 
-        sendButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                NetworkManager.AddElement(new MusicBand(
-                        nameField.getText(),
-                        new Coordinates((double) xField.getValue(), (double) yField.getValue()),
-                        (int) numberOfPartField.getValue(),
-                        getMusicGenre((String) genreList.getSelectedItem()),
-                        new Label(label.getText())
-                ));
-
-                dispose();
-            }
-        });
+        if (actionListener != null) {
+            sendButton.addActionListener(actionListener);
+        }
+        else {
+            sendButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    MusicBand band = new MusicBand(
+                            nameField.getText(),
+                            new Coordinates((double) xField.getValue(), (double) yField.getValue()),
+                            (int) numberOfPartField.getValue(),
+                            getMusicGenre((String) genreList.getSelectedItem()),
+                            new Label(label.getText())
+                    );
+                    switch(action) {
+                        case Add:
+                            NetworkManager.AddElement(band);
+                            break;
+                        case Update:
+                            NetworkManager.UpdateElement((long) parameter, band);
+                            break;
+                        case AddIfMin:
+                            NetworkManager.AddIfMin(band);
+                            break;
+                        case RemoveGreater:
+                            NetworkManager.RemoveGreater(band);
+                            break;
+                        case RemoveLower:
+                            NetworkManager.RemoveLower(band);
+                            break;
+                        default:
+                            throw new IllegalArgumentException("Unknown action type: " + action);
+                    }
+                    dispose();
+                }
+            });
+        }
     }
 
-    private MusicGenre getMusicGenre(String genre) {
+    public static MusicGenre getMusicGenre(String genre) {
         switch (genre) {
             case "Rock":
                 return MusicGenre.ROCK;
