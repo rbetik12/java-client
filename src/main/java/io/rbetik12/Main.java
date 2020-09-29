@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class Main {
     private static void createAndShowAuthUi() {
-        WindowManager.LoadWindow(WindowType.Table);
+        WindowManager.LoadWindow(WindowType.Objects);
     }
 
     public static void main(String[] args) {

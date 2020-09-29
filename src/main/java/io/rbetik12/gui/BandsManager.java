@@ -8,13 +8,13 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TableManager {
+public class BandsManager {
 
-    private static List<MusicBand> fetchTable() {
+    private static List<MusicBand> fetchBands() {
         List<MusicBand> musicBands = new ArrayList<> ();
-        musicBands.add(new MusicBand("Band", new Coordinates(10, 10), 10, MusicGenre.HIP_HOP, new Label("a")));
-        musicBands.add(new MusicBand("Band1", new Coordinates(10, 10), 30, MusicGenre.HIP_HOP, new Label("b")));
-        musicBands.add(new MusicBand("Band1", new Coordinates(10, 10), 20, MusicGenre.HIP_HOP, new Label("c")));
+        musicBands.add(new MusicBand("Band", new Coordinates(10, 10), 10, MusicGenre.HIP_HOP, new Label("a"), new User(0, "kek", "lol")));
+        musicBands.add(new MusicBand("Band1", new Coordinates(60, 70), 30, MusicGenre.HIP_HOP, new Label("b"), new User(1, "kek", "lol")));
+        musicBands.add(new MusicBand("Band2", new Coordinates(120, 100), 20, MusicGenre.HIP_HOP, new Label("c"), new User(2, "kek", "lol")));
 
         musicBands.get(0).setCreationDate(ZonedDateTime.now());
         musicBands.get(1).setCreationDate(ZonedDateTime.now());
@@ -49,7 +49,7 @@ public class TableManager {
     }
 
     public static String[][] getTable(SortBy sort) {
-        List<MusicBand> bands = fetchTable();
+        List<MusicBand> bands = fetchBands();
         bands = sortList(sort, bands);
         String[][] bandsTable = new String[bands.size()][6];
 
@@ -65,5 +65,9 @@ public class TableManager {
         }
 
         return bandsTable;
+    }
+
+    public static List<MusicBand> getBands() {
+        return fetchBands();
     }
 }

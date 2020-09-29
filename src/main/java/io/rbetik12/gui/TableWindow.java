@@ -7,11 +7,8 @@ import io.rbetik12.network.NetworkManager;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 
 public class TableWindow extends JFrame {
     private final int windowWidth = 800;
@@ -55,6 +52,15 @@ public class TableWindow extends JFrame {
         idField.setEditable(true);
         idField.setMaximumSize(new Dimension(Integer.MAX_VALUE, idField.getPreferredSize().height));
         commandsPanel.add(idField);
+
+        JButton showElementsButton = new JButton("Show objects");
+        showElementsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                WindowManager.LoadWindow(WindowType.Objects);
+            }
+        });
+        commandsPanel.add(showElementsButton);
 
         JButton addElementButton = new JButton("Add");
         addElementButton.addActionListener(new ActionListener() {
@@ -133,7 +139,7 @@ public class TableWindow extends JFrame {
         JPanel tablePanel = new JPanel();
         add(tablePanel);
 
-        String[][] data = TableManager.getTable(SortBy.id);
+        String[][] data = BandsManager.getTable(SortBy.id);
 
         String[] columnNames = {"ID", "Name", "Creation date", "Number of participants", "Genre", "Label"};
 
@@ -156,25 +162,25 @@ public class TableWindow extends JFrame {
                 String[][] sortedData;
                 switch (name) {
                     case "ID":
-                        sortedData = TableManager.getTable(SortBy.id);
+                        sortedData = BandsManager.getTable(SortBy.id);
                         break;
                     case "Name":
-                        sortedData = TableManager.getTable(SortBy.name);
+                        sortedData = BandsManager.getTable(SortBy.name);
                         break;
                     case "Creation name":
-                        sortedData = TableManager.getTable(SortBy.creationDate);
+                        sortedData = BandsManager.getTable(SortBy.creationDate);
                         break;
                     case "Number of participants":
-                        sortedData = TableManager.getTable(SortBy.numberOfParticipants);
+                        sortedData = BandsManager.getTable(SortBy.numberOfParticipants);
                         break;
                     case "Genre":
-                        sortedData = TableManager.getTable(SortBy.genre);
+                        sortedData = BandsManager.getTable(SortBy.genre);
                         break;
                     case "Label":
-                        sortedData = TableManager.getTable(SortBy.label);
+                        sortedData = BandsManager.getTable(SortBy.label);
                         break;
                     default:
-                        sortedData = TableManager.getTable(SortBy.id);
+                        sortedData = BandsManager.getTable(SortBy.id);
                         break;
                 }
                 table.setModel(new DefaultTableModel(sortedData, columnNames));

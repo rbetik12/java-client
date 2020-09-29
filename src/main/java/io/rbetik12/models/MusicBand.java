@@ -10,6 +10,7 @@ public class MusicBand implements Comparable {
     private Integer numberOfParticipants; //Поле может быть null, Значение поля должно быть больше 0
     private final MusicGenre genre; //Поле может быть null
     private final Label label; //Поле не может быть null
+    private User author;
 
     public MusicBand() {
         name = "Name";
@@ -18,12 +19,13 @@ public class MusicBand implements Comparable {
         label = new Label("Label");
     }
 
-    public MusicBand(String name, Coordinates coordinates, int numberOfParticipants, MusicGenre genre, Label label) {
+    public MusicBand(String name, Coordinates coordinates, int numberOfParticipants, MusicGenre genre, Label label, User user) {
         this.name = name;
         this.coordinates = coordinates;
         this.numberOfParticipants = numberOfParticipants;
         this.genre = genre;
         this.label = label;
+        this.author = user;
     }
 
     public long getId() {
@@ -52,6 +54,10 @@ public class MusicBand implements Comparable {
 
     public Label getLabel() {
         return label;
+    }
+
+    public User getAuthor() {
+        return author;
     }
 
     public void setCreationDate(ZonedDateTime time) {

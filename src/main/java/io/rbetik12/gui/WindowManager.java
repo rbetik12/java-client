@@ -36,6 +36,9 @@ public class WindowManager {
             case Auth:
                 new AuthWindow();
                 break;
+            case Objects:
+                new ObjectsWindow();
+                break;
             default:
                 throw new IllegalArgumentException("Window type " + windowType + " is not supported");
         }

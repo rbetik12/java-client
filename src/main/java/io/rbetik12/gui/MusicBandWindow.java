@@ -133,7 +133,8 @@ public class MusicBandWindow extends JFrame {
                             new Coordinates((double) xField.getValue(), (double) yField.getValue()),
                             (int) numberOfPartField.getValue(),
                             getMusicGenre((String) genreList.getSelectedItem()),
-                            new Label(label.getText())
+                            new Label(label.getText()),
+                            null
                     );
                     switch(action) {
                         case Add:
