@@ -1,5 +1,6 @@
 package io.rbetik12.gui;
 
+import io.rbetik12.models.MusicBand;
 import io.rbetik12.models.NetAction;
 import io.rbetik12.models.WindowType;
 
@@ -58,6 +59,9 @@ public class WindowManager {
                     new MusicBandWindow(action);
                 else
                     new MusicBandWindow(action, parameter);
+                break;
+            case MusicBandFilled:
+                new MusicBandWindowFilled((MusicBand) parameter);
                 break;
             default:
                 throw new IllegalArgumentException("Window type " + type + " is not supported");

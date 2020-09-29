@@ -4,5 +4,6 @@ public enum WindowType {
     Auth,
     Table,
     Objects,
-    MusicBand
+    MusicBand,
+    MusicBandFilled
 }

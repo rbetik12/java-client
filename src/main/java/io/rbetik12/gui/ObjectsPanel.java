@@ -1,6 +1,8 @@
 package io.rbetik12.gui;
 
 import io.rbetik12.models.MusicBand;
+import io.rbetik12.models.NetAction;
+import io.rbetik12.models.WindowType;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,6 +21,7 @@ public class ObjectsPanel extends JPanel {
     final private Random random = new Random();
     private int greenValue;
     private int blueValue;
+    private java.util.List<MusicBand> bands;
 
     public ObjectsPanel() {
         setBorder(BorderFactory.createLineBorder(Color.black));
@@ -42,7 +45,10 @@ public class ObjectsPanel extends JPanel {
         addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
-                System.out.println("Clicked at: " + mouseEvent.getPoint());
+                MusicBand collidedBand = getCollision(mouseEvent.getX(), mouseEvent.getY());
+                if (collidedBand != null) {
+                    WindowManager.LoadModalWindow(WindowType.MusicBandFilled, NetAction.Update, collidedBand);
+                }
             }
 
             @Override
@@ -77,8 +83,8 @@ public class ObjectsPanel extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
 
-
-        for (MusicBand e : BandsManager.getBands()) {
+        bands = BandsManager.getBands();
+        for (MusicBand e : bands) {
             greenValue = random.nextInt() % 255;
             if (greenValue < 0) greenValue = greenValue + 255;
             blueValue = random.nextInt() % 255;
@@ -93,7 +99,14 @@ public class ObjectsPanel extends JPanel {
         }
     }
 
-    private boolean checkForCollision() {
-        return false;
+    private MusicBand getCollision(int mouseX, int mouseY) {
+        for (MusicBand e : bands) {
+            int x = e.getCoordinates().getX().intValue();
+            int y = e.getCoordinates().getY().intValue();
+
+            if (mouseX >= x && mouseX <= x + squareW && mouseY > y && mouseY <= y + squareH)
+                return e;
+        }
+        return null;
     }
 }

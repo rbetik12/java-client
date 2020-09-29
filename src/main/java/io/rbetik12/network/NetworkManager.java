@@ -31,4 +31,12 @@ public class NetworkManager {
     public static void RemoveGreater(MusicBand e) {
         System.out.println("Remove greater: " + e);
     }
+
+    public static void UpdateElement(MusicBand e) {
+        System.out.println("Updating element:" + e);
+    }
+
+    public static void Remove(MusicBand e) {
+        System.out.println("Removed element: " + e);
+    }
 }

@@ -16,6 +16,10 @@ public class MusicBandWindow extends JFrame {
     private NetAction action;
     private Object parameter;
 
+    public MusicBandWindow() {
+        super("Music band");
+    }
+
     public MusicBandWindow(ActionListener actionListener) {
         super("Music band");
         init();
@@ -35,7 +39,7 @@ public class MusicBandWindow extends JFrame {
         this.parameter = parameter;
     }
 
-    private void init() {
+    protected void init() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 
@@ -48,7 +52,7 @@ public class MusicBandWindow extends JFrame {
         setVisible(true);
     }
 
-    private void DrawInputMenu() {
+    protected void DrawInputMenu() {
         JLabel nameLabel = new JLabel("Name");
         nameLabel.setAlignmentX(CENTER_ALIGNMENT);
         add(nameLabel);
@@ -173,6 +177,23 @@ public class MusicBandWindow extends JFrame {
                 return MusicGenre.BLUES;
             case "Punk rock":
                 return MusicGenre.PUNK_ROCK;
+            default:
+                throw new IllegalArgumentException("Cannot parse genre: " + genre);
+        }
+    }
+
+    public static String getMusicGenreName(MusicGenre genre) {
+        switch (genre) {
+            case ROCK:
+                return "Rock";
+            case HIP_HOP:
+                return "Hip hop";
+            case PSYCHEDELIC_CLOUD_RAP:
+                return "Psychedelic cloud rap";
+            case BLUES:
+                return "Blues";
+            case PUNK_ROCK:
+                return "Punk rock";
             default:
                 throw new IllegalArgumentException("Cannot parse genre: " + genre);
         }
