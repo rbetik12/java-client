@@ -1,6 +1,8 @@
 package io.rbetik12.models;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private long id;
     private String username;
     private String password;
@@ -9,6 +11,16 @@ public class User {
         this.id = id;
         this.username = username;
         this.password = password;
+    }
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return username + " " + password;
     }
 
     public long getId() {

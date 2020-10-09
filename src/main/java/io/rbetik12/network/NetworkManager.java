@@ -1,11 +1,19 @@
 package io.rbetik12.network;
 
 import io.rbetik12.models.MusicBand;
+import io.rbetik12.models.User;
 
 public class NetworkManager {
 
+    private static boolean SendAuth(User user) {
+        Request request = new Request(CommandType.Auth, user);
+        Connection.getConnection().Send(request);
+        return true;
+    }
+
     public static boolean Authenticate(String username, String password) {
-        return username.equals("rbetik12") && password.equals("123456");
+        boolean res = SendAuth(new User(username, password));
+        return res;
     }
 
     public static void AddElement(MusicBand e) {
