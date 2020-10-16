@@ -47,7 +47,7 @@ public class ObjectsPanel extends JPanel {
             public void mouseClicked(MouseEvent mouseEvent) {
                 MusicBand collidedBand = getCollision(mouseEvent.getX(), mouseEvent.getY());
                 if (collidedBand != null) {
-                    WindowManager.LoadModalWindow(WindowType.MusicBandFilled, NetAction.Update, collidedBand);
+                    WindowManager.loadModalWindow(WindowType.MusicBandFilled, NetAction.Update, collidedBand);
                 }
             }
 

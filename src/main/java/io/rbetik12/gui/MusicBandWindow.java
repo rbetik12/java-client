@@ -43,7 +43,7 @@ public class MusicBandWindow extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 
-        DrawInputMenu();
+        drawInputMenu();
 
         pack();
         setSize(windowWidth, windowHeight);
@@ -52,7 +52,7 @@ public class MusicBandWindow extends JFrame {
         setVisible(true);
     }
 
-    protected void DrawInputMenu() {
+    protected void drawInputMenu() {
         JLabel nameLabel = new JLabel("Name");
         nameLabel.setAlignmentX(CENTER_ALIGNMENT);
         add(nameLabel);
@@ -142,19 +142,19 @@ public class MusicBandWindow extends JFrame {
                     );
                     switch(action) {
                         case Add:
-                            NetworkManager.AddElement(band);
+                            NetworkManager.addElement(band);
                             break;
                         case Update:
-                            NetworkManager.UpdateElement((long) parameter, band);
+                            NetworkManager.updateElement((long) parameter, band);
                             break;
                         case AddIfMin:
-                            NetworkManager.AddIfMin(band);
+                            NetworkManager.addIfMin(band);
                             break;
                         case RemoveGreater:
-                            NetworkManager.RemoveGreater(band);
+                            NetworkManager.removeGreater(band);
                             break;
                         case RemoveLower:
-                            NetworkManager.RemoveLower(band);
+                            NetworkManager.removeLower(band);
                             break;
                         default:
                             throw new IllegalArgumentException("Unknown action type: " + action);

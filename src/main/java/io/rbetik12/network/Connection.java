@@ -22,10 +22,10 @@ public class Connection {
         } catch (UnknownHostException e) {
             System.out.println("Unknown host: " + e);
         }
-        Send(new Request(CommandType.OpenConnection, "Open connection"));
+        send(new Request(CommandType.OpenConnection, "Open connection"));
     }
 
-    public void Send(Request request) {
+    public void send(Request request) {
         ByteArrayOutputStream bStream = new ByteArrayOutputStream();
         try {
             ObjectOutput oo = new ObjectOutputStream(bStream);

@@ -8,28 +8,28 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 
 public class WindowManager {
-    public static void LoadWindow(WindowType windowType) {
-        OpenWindow(windowType);
+    public static void loadWindow(WindowType windowType) {
+        openWindow(windowType);
     }
 
-    public static void LoadWindow(WindowType windowType, JFrame currentFrame) {
+    public static void loadWindow(WindowType windowType, JFrame currentFrame) {
         currentFrame.dispose();
-        OpenWindow(windowType);
+        openWindow(windowType);
     }
 
-    public static void LoadModalWindow(WindowType windowType, ActionListener actionListener) {
+    public static void loadModalWindow(WindowType windowType, ActionListener actionListener) {
         OpenModalWindow(windowType, actionListener);
     }
 
-    public static void LoadModalWindow(WindowType windowType, NetAction netAction) {
+    public static void loadModalWindow(WindowType windowType, NetAction netAction) {
         OpenModalWindow(windowType, netAction, null);
     }
 
-    public static void LoadModalWindow(WindowType windowType, NetAction netAction, Object parameter) {
+    public static void loadModalWindow(WindowType windowType, NetAction netAction, Object parameter) {
         OpenModalWindow(windowType, netAction, parameter);
     }
 
-    private static void OpenWindow(WindowType windowType) {
+    private static void openWindow(WindowType windowType) {
         switch (windowType) {
             case Table:
                 new TableWindow();

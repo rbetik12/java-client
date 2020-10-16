@@ -21,7 +21,7 @@ public class MusicBandWindowFilled extends MusicBandWindow {
     }
 
     @Override
-    protected void DrawInputMenu() {
+    protected void drawInputMenu() {
         JLabel nameLabel = new JLabel("Name");
         nameLabel.setAlignmentX(CENTER_ALIGNMENT);
         add(nameLabel);
@@ -117,7 +117,7 @@ public class MusicBandWindowFilled extends MusicBandWindow {
                         null
                 );
 
-                NetworkManager.UpdateElement(band);
+                NetworkManager.updateElement(band);
 
                 dispose();
             }
@@ -139,7 +139,7 @@ public class MusicBandWindowFilled extends MusicBandWindow {
                         null
                 );
 
-                NetworkManager.Remove(band);
+                NetworkManager.remove(band);
 
                 dispose();
             }

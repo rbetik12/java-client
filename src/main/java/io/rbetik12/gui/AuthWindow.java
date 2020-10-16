@@ -32,7 +32,7 @@ public class AuthWindow extends JFrame {
             }
         });
 
-        DrawAuthUi();
+        drawAuthUi();
 
         pack();
         setSize(windowWidth, windowHeight);
@@ -42,7 +42,7 @@ public class AuthWindow extends JFrame {
         setVisible(true);
     }
 
-    private void DrawAuthUi() {
+    private void drawAuthUi() {
         JLabel usernameLabel = new JLabel("Username");
         usernameLabel.setAlignmentX(CENTER_ALIGNMENT);
         add(usernameLabel);
@@ -87,7 +87,7 @@ public class AuthWindow extends JFrame {
         sumbit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Authenticate();
+                authenticate();
             }
         });
 
@@ -100,10 +100,10 @@ public class AuthWindow extends JFrame {
         });
     }
 
-    private void Authenticate() {
+    private void authenticate() {
         if (NetworkManager.Authenticate(usernameField.getText(), String.valueOf(passwordField.getPassword()))) {
             errorLabel.setVisible(false);
-//            WindowManager.LoadWindow(WindowType.Table, this);
+            WindowManager.loadWindow(WindowType.Table, this);
         } else {
             errorLabel.setVisible(true);
         }

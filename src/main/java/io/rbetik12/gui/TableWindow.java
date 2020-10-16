@@ -27,8 +27,8 @@ public class TableWindow extends JFrame {
             }
         });
 
-        DrawTable();
-        DrawCommandsMenu();
+        drawTable();
+        drawCommandsMenu();
 
         pack();
         setSize(windowWidth, windowHeight);
@@ -37,7 +37,7 @@ public class TableWindow extends JFrame {
         setVisible(true);
     }
 
-    private void DrawCommandsMenu() {
+    private void drawCommandsMenu() {
         JPanel commandsPanel = new JPanel(new FlowLayout());
         commandsPanel.setBackground(Color.decode("#673AB7"));
         add(commandsPanel);
@@ -57,7 +57,7 @@ public class TableWindow extends JFrame {
         showElementsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                WindowManager.LoadWindow(WindowType.Objects);
+                WindowManager.loadWindow(WindowType.Objects);
             }
         });
         commandsPanel.add(showElementsButton);
@@ -66,7 +66,7 @@ public class TableWindow extends JFrame {
         addElementButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                WindowManager.LoadModalWindow(WindowType.MusicBand, NetAction.Add);
+                WindowManager.loadModalWindow(WindowType.MusicBand, NetAction.Add);
             }
         });
         commandsPanel.add(addElementButton);
@@ -75,7 +75,7 @@ public class TableWindow extends JFrame {
         updateElementButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                WindowManager.LoadModalWindow(WindowType.MusicBand, NetAction.Update, idField.getValue());
+                WindowManager.loadModalWindow(WindowType.MusicBand, NetAction.Update, idField.getValue());
             }
         });
         commandsPanel.add(updateElementButton);
@@ -85,7 +85,7 @@ public class TableWindow extends JFrame {
         removeElementButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                NetworkManager.Remove((long) idField.getValue());
+                NetworkManager.remove((long) idField.getValue());
             }
         });
         commandsPanel.add(removeElementButton);
@@ -107,7 +107,7 @@ public class TableWindow extends JFrame {
         addIfLower.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                WindowManager.LoadModalWindow(WindowType.MusicBand, NetAction.AddIfMin);
+                WindowManager.loadModalWindow(WindowType.MusicBand, NetAction.AddIfMin);
             }
         });
         commandsPanel.add(addIfLower);
@@ -118,7 +118,7 @@ public class TableWindow extends JFrame {
         removeGreaterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                WindowManager.LoadModalWindow(WindowType.MusicBand, NetAction.RemoveGreater);
+                WindowManager.loadModalWindow(WindowType.MusicBand, NetAction.RemoveGreater);
             }
         });
         commandsPanel.add(removeGreaterButton);
@@ -129,13 +129,13 @@ public class TableWindow extends JFrame {
         removeLowerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                WindowManager.LoadModalWindow(WindowType.MusicBand, NetAction.RemoveLower);
+                WindowManager.loadModalWindow(WindowType.MusicBand, NetAction.RemoveLower);
             }
         });
         commandsPanel.add(removeLowerButton);
     }
 
-    private void DrawTable() {
+    private void drawTable() {
         JPanel tablePanel = new JPanel();
         add(tablePanel);
 
