@@ -22,6 +22,7 @@ public class Connection {
         } catch (UnknownHostException e) {
             System.out.println("Unknown host: " + e);
         }
+        Send(new Request(CommandType.OpenConnection, "Open connection"));
     }
 
     public void Send(Request request) {
@@ -32,6 +33,7 @@ public class Connection {
             oo.close();
         } catch (IOException e) {
             System.out.println("Can't serialize object: " + e);
+            return;
         }
 
         byte[] serializedRequest = bStream.toByteArray();
