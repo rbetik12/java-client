@@ -8,7 +8,8 @@ public class NetworkManager {
     private static boolean sendAuth(User user) {
         Request request = new Request(CommandType.Auth, user);
         Connection.getConnection().send(request);
-        return true;
+        Response response = Connection.getConnection().receive();
+        return response.getCookie("Auth").equals("yes");
     }
 
     public static boolean Authenticate(String username, String password) {

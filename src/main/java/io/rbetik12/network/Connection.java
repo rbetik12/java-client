@@ -1,9 +1,6 @@
 package io.rbetik12.network;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.*;
 
 public class Connection {
@@ -11,18 +8,20 @@ public class Connection {
 
     private DatagramSocket socket;
     private InetAddress ip;
+    private byte buffer[];
     final private int port = 7000;
 
     private Connection() {
         try {
             ip = InetAddress.getLocalHost();
             socket = new DatagramSocket();
+            buffer = new byte[256000];
         } catch (SocketException e) {
             System.out.println("Can't create socket: " + e);
         } catch (UnknownHostException e) {
             System.out.println("Unknown host: " + e);
         }
-        send(new Request(CommandType.OpenConnection, "Open connection"));
+//        send(new Request(CommandType.OpenConnection, "Open connection"));
     }
 
     public void send(Request request) {
@@ -48,6 +47,27 @@ public class Connection {
             System.out.println("Can't send request: " + e);
         }
 
+    }
+
+    public Response receive() {
+        DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
+        try {
+            socket.receive(packet);
+        } catch (IOException e) {
+            System.out.println("Can't receive packet: " + e);
+            return null;
+        }
+
+        ByteArrayInputStream in = new ByteArrayInputStream(packet.getData());
+        Response response;
+        try(ObjectInputStream is = new ObjectInputStream(in)) {
+            response = (Response) is.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Can't deserialize object: " + e);
+            return null;
+        }
+
+        return response;
     }
 
     public static Connection getConnection() {
