@@ -39,8 +39,6 @@ public class Connection {
 
         DatagramPacket dp = new DatagramPacket(serializedRequest, serializedRequest.length, ip, port);
 
-        System.out.println(request);
-
         try {
             socket.send(dp);
         } catch (IOException e) {
