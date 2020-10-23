@@ -1,8 +1,9 @@
 package io.rbetik12.models;
 
+import java.io.Serializable;
 import java.time.ZonedDateTime;
 
-public class MusicBand implements Comparable {
+public class MusicBand implements Comparable, Serializable {
     private long id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private final String name; //Поле не может быть null, Строка не может быть пустой
     private final Coordinates coordinates; //Поле не может быть null
@@ -62,6 +63,10 @@ public class MusicBand implements Comparable {
 
     public void setCreationDate(ZonedDateTime time) {
         creationDate = time;
+    }
+
+    public void setAuthor(User user) {
+        this.author = user;
     }
 
     @Override

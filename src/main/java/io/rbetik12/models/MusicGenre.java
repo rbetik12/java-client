@@ -1,6 +1,8 @@
 package io.rbetik12.models;
 
-public enum MusicGenre {
+import java.io.Serializable;
+
+public enum MusicGenre implements Serializable {
     ROCK,
     HIP_HOP,
     PSYCHEDELIC_CLOUD_RAP,

@@ -9,6 +9,7 @@ public class NetworkManager {
         Request request = new Request(CommandType.Auth, user);
         Connection.getConnection().send(request);
         Response response = Connection.getConnection().receive();
+        CookieStorage.cookies = response.getCookies();
         return response.getCookie("Auth").equals("yes");
     }
 
@@ -19,6 +20,9 @@ public class NetworkManager {
 
     public static void addElement(MusicBand e) {
         System.out.println("Added new music band: " + e);
+        Request request = new Request(CommandType.Add, e);
+        request.addCookie("UserId", CookieStorage.cookies.get("UserId"));
+        Connection.getConnection().send(request);
     }
 
     public static void updateElement(long id, MusicBand e) {

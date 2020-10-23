@@ -1,6 +1,8 @@
 package io.rbetik12.models;
 
-public class Label implements Comparable {
+import java.io.Serializable;
+
+public class Label implements Comparable, Serializable {
     private final String name;
 
     public Label(String name) {

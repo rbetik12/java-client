@@ -1,6 +1,8 @@
 package io.rbetik12.models;
 
-public class Coordinates implements Comparable {
+import java.io.Serializable;
+
+public class Coordinates implements Comparable, Serializable {
     private final Double x; //Поле не может быть null
     private final Double y; //Максимальное значение поля: 57, Поле не может быть null
 

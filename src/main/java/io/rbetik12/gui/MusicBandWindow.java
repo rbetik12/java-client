@@ -140,6 +140,7 @@ public class MusicBandWindow extends JFrame {
                             new Label(label.getText()),
                             null
                     );
+                    dispose();
                     switch(action) {
                         case Add:
                             NetworkManager.addElement(band);
@@ -159,7 +160,6 @@ public class MusicBandWindow extends JFrame {
                         default:
                             throw new IllegalArgumentException("Unknown action type: " + action);
                     }
-                    dispose();
                 }
             });
         }
