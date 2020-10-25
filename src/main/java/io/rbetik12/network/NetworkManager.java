@@ -1,6 +1,7 @@
 package io.rbetik12.network;
 
 import io.rbetik12.models.MusicBand;
+import io.rbetik12.models.MusicCollection;
 import io.rbetik12.models.User;
 
 public class NetworkManager {
@@ -19,10 +20,11 @@ public class NetworkManager {
     }
 
     public static void addElement(MusicBand e) {
-        System.out.println("Added new music band: " + e);
         Request request = new Request(CommandType.Add, e);
         request.addCookie("UserId", CookieStorage.cookies.get("UserId"));
         Connection.getConnection().send(request);
+        Response response = Connection.getConnection().receive();
+        MusicCollection collection = (MusicCollection) response.getBody();
     }
 
     public static void updateElement(long id, MusicBand e) {
