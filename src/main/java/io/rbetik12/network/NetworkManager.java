@@ -1,5 +1,6 @@
 package io.rbetik12.network;
 
+import io.rbetik12.collection.CollectionManager;
 import io.rbetik12.models.MusicBand;
 import io.rbetik12.models.MusicCollection;
 import io.rbetik12.models.User;
@@ -25,6 +26,7 @@ public class NetworkManager {
         Connection.getConnection().send(request);
         Response response = Connection.getConnection().receive();
         MusicCollection collection = (MusicCollection) response.getBody();
+        CollectionManager.getManager().setCollection(collection);
     }
 
     public static void updateElement(long id, MusicBand e) {
