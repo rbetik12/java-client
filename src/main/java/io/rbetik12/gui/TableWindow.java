@@ -13,6 +13,7 @@ import java.awt.event.*;
 public class TableWindow extends JFrame {
     private final int windowWidth = 800;
     private final int windowHeight = 600;
+    private JTable table;
 
     public TableWindow() {
         super("Client");
@@ -29,12 +30,22 @@ public class TableWindow extends JFrame {
 
         drawTable();
         drawCommandsMenu();
+        createTableUpdaterThread();
 
         pack();
         setSize(windowWidth, windowHeight);
         setFocusable(true);
         requestFocus();
         setVisible(true);
+    }
+
+    private void createTableUpdaterThread() {
+        Thread updaterThread = new TableUpdaterThread(this);
+        updaterThread.start();
+    }
+
+    public void updateTableModel() {
+
     }
 
     private void drawCommandsMenu() {
@@ -137,7 +148,6 @@ public class TableWindow extends JFrame {
 
     private void drawTable() {
         JPanel tablePanel = new JPanel();
-        add(tablePanel);
 
         String[][] data = BandsManager.getTable(SortBy.id);
 
@@ -145,7 +155,7 @@ public class TableWindow extends JFrame {
 
         DefaultTableModel tableModel = new DefaultTableModel(data, columnNames);
 
-        JTable table = new JTable(tableModel);
+        table = new JTable(tableModel);
 
         JScrollPane scrollPane = new JScrollPane(table);
         add(scrollPane);

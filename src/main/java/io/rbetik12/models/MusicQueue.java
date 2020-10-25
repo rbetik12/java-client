@@ -2,10 +2,18 @@ package io.rbetik12.models;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.PriorityQueue;
+import java.util.stream.Collectors;
 
 public class MusicQueue implements MusicCollection, Serializable {
     private PriorityQueue<MusicBand> queue;
+
+    @Override
+    public List<MusicBand> toList() {
+        return new ArrayList<>(queue);
+    }
 
     public MusicQueue() {
         queue = new PriorityQueue<>();

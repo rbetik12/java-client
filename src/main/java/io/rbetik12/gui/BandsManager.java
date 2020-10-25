@@ -1,5 +1,6 @@
 package io.rbetik12.gui;
 
+import io.rbetik12.collection.CollectionManager;
 import io.rbetik12.models.*;
 
 import java.time.ZonedDateTime;
@@ -11,15 +12,7 @@ import java.util.stream.Collectors;
 public class BandsManager {
 
     private static List<MusicBand> fetchBands() {
-        List<MusicBand> musicBands = new ArrayList<> ();
-        musicBands.add(new MusicBand("Band", new Coordinates(10, 10), 10, MusicGenre.HIP_HOP, new Label("a"), new User(0, "kek", "lol")));
-        musicBands.add(new MusicBand("Band1", new Coordinates(60, 70), 30, MusicGenre.HIP_HOP, new Label("b"), new User(1, "kek", "lol")));
-        musicBands.add(new MusicBand("Band2", new Coordinates(120, 100), 20, MusicGenre.HIP_HOP, new Label("c"), new User(2, "kek", "lol")));
-
-        musicBands.get(0).setCreationDate(ZonedDateTime.now());
-        musicBands.get(1).setCreationDate(ZonedDateTime.now());
-        musicBands.get(2).setCreationDate(ZonedDateTime.now());
-        return musicBands;
+        return CollectionManager.getManager().getCollection().toList();
     }
 
     private static List<MusicBand> sortList(SortBy sort, List<MusicBand> bands) {
