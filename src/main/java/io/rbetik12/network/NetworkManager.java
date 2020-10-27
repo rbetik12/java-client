@@ -12,7 +12,12 @@ public class NetworkManager {
         Connection.getConnection().send(request);
         Response response = Connection.getConnection().receive();
         CookieStorage.cookies = response.getCookies();
-        return response.getCookie("Auth").equals("yes");
+
+        boolean authResult = response.getCookie("Auth").equals("yes");
+        if (authResult) {
+            CollectionManager.getManager().setCollection((MusicCollection) response.getBody());
+        }
+        return authResult;
     }
 
     public static boolean Authenticate(String username, String password) {

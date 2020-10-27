@@ -13,6 +13,7 @@ import java.awt.event.*;
 public class TableWindow extends JFrame {
     private final int windowWidth = 800;
     private final int windowHeight = 600;
+    private final String[] columnNames = {"ID", "Name", "Creation date", "Number of participants", "Genre", "Label"};
     private JTable table;
 
     public TableWindow() {
@@ -44,8 +45,40 @@ public class TableWindow extends JFrame {
         updaterThread.start();
     }
 
-    public void updateTableModel() {
+    public void updateTableModel(MouseEvent e) {
+        int col = table.columnAtPoint(e.getPoint());
+        String name = table.getColumnName(col);
+        String[][] sortedData;
+        switch (name) {
+            case "ID":
+                sortedData = BandsManager.getTable(SortBy.id);
+                break;
+            case "Name":
+                sortedData = BandsManager.getTable(SortBy.name);
+                break;
+            case "Creation name":
+                sortedData = BandsManager.getTable(SortBy.creationDate);
+                break;
+            case "Number of participants":
+                sortedData = BandsManager.getTable(SortBy.numberOfParticipants);
+                break;
+            case "Genre":
+                sortedData = BandsManager.getTable(SortBy.genre);
+                break;
+            case "Label":
+                sortedData = BandsManager.getTable(SortBy.label);
+                break;
+            default:
+                sortedData = BandsManager.getTable(SortBy.id);
+                break;
+        }
+        table.setModel(new DefaultTableModel(sortedData, columnNames));
+    }
 
+    public void updateTableModel() {
+        String[][] sortedData;
+        sortedData = BandsManager.getTable(SortBy.name);
+        table.setModel(new DefaultTableModel(sortedData, columnNames));
     }
 
     private void drawCommandsMenu() {
@@ -151,8 +184,6 @@ public class TableWindow extends JFrame {
 
         String[][] data = BandsManager.getTable(SortBy.id);
 
-        String[] columnNames = {"ID", "Name", "Creation date", "Number of participants", "Genre", "Label"};
-
         DefaultTableModel tableModel = new DefaultTableModel(data, columnNames);
 
         table = new JTable(tableModel);
@@ -167,33 +198,7 @@ public class TableWindow extends JFrame {
         table.getTableHeader().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                int col = table.columnAtPoint(e.getPoint());
-                String name = table.getColumnName(col);
-                String[][] sortedData;
-                switch (name) {
-                    case "ID":
-                        sortedData = BandsManager.getTable(SortBy.id);
-                        break;
-                    case "Name":
-                        sortedData = BandsManager.getTable(SortBy.name);
-                        break;
-                    case "Creation name":
-                        sortedData = BandsManager.getTable(SortBy.creationDate);
-                        break;
-                    case "Number of participants":
-                        sortedData = BandsManager.getTable(SortBy.numberOfParticipants);
-                        break;
-                    case "Genre":
-                        sortedData = BandsManager.getTable(SortBy.genre);
-                        break;
-                    case "Label":
-                        sortedData = BandsManager.getTable(SortBy.label);
-                        break;
-                    default:
-                        sortedData = BandsManager.getTable(SortBy.id);
-                        break;
-                }
-                table.setModel(new DefaultTableModel(sortedData, columnNames));
+                updateTableModel(e);
             }
         });
     }
