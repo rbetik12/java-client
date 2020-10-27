@@ -35,7 +35,14 @@ public class NetworkManager {
     }
 
     public static void updateElement(long id, MusicBand e) {
+        e.setId(id);
+        Request request = new Request(CommandType.UpdateElement, e);
+        request.addCookie("UserId", CookieStorage.cookies.get("UserId"));
+        Connection.getConnection().send(request);
         System.out.println("Updating element with id: " + id + " " + e);
+        Response response = Connection.getConnection().receive();
+        MusicCollection collection = (MusicCollection) response.getBody();
+        CollectionManager.getManager().setCollection(collection);
     }
 
     public static void remove(long id) {
