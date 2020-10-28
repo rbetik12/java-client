@@ -32,7 +32,7 @@ public class MusicQueue implements MusicCollection, Serializable {
     }
 
     @Override
-    public void remove(int id) {
+    public void remove(int id, int userId) {
 
     }
 

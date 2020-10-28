@@ -39,7 +39,6 @@ public class NetworkManager {
         Request request = new Request(CommandType.UpdateElement, e);
         request.addCookie("UserId", CookieStorage.cookies.get("UserId"));
         Connection.getConnection().send(request);
-        System.out.println("Updating element with id: " + id + " " + e);
         Response response = Connection.getConnection().receive();
         MusicCollection collection = (MusicCollection) response.getBody();
         CollectionManager.getManager().setCollection(collection);
@@ -47,6 +46,12 @@ public class NetworkManager {
 
     public static void remove(long id) {
         System.out.println("Removed element with id: " + id);
+        Request request = new Request(CommandType.RemoveElement, id);
+        request.addCookie("UserId", CookieStorage.cookies.get("UserId"));
+        Connection.getConnection().send(request);
+        Response response = Connection.getConnection().receive();
+        MusicCollection collection = (MusicCollection) response.getBody();
+        CollectionManager.getManager().setCollection(collection);
     }
 
     public static void addIfMin(MusicBand e) {
