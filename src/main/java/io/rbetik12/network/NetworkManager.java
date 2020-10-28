@@ -5,6 +5,8 @@ import io.rbetik12.models.MusicBand;
 import io.rbetik12.models.MusicCollection;
 import io.rbetik12.models.User;
 
+import java.time.ZonedDateTime;
+
 public class NetworkManager {
 
     private static boolean sendAuth(User user) {
@@ -56,6 +58,13 @@ public class NetworkManager {
 
     public static void addIfMin(MusicBand e) {
         System.out.println("Add if min: " + e);
+        e.setCreationDate(ZonedDateTime.now());
+        Request request = new Request(CommandType.AddIfMin, e);
+        request.addCookie("UserId", CookieStorage.cookies.get("UserId"));
+        Connection.getConnection().send(request);
+        Response response = Connection.getConnection().receive();
+        MusicCollection collection = (MusicCollection) response.getBody();
+        CollectionManager.getManager().setCollection(collection);
     }
 
     public static void removeLower(MusicBand e) {

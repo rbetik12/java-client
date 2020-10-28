@@ -5,5 +5,6 @@ public enum CommandType {
     Auth,
     OpenConnection,
     UpdateElement,
-    RemoveElement
+    RemoveElement,
+    AddIfMin
 }
