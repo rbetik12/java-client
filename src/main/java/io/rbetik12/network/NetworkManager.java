@@ -80,6 +80,13 @@ public class NetworkManager {
 
     public static void removeGreater(MusicBand e) {
         System.out.println("Remove greater: " + e);
+        e.setCreationDate(ZonedDateTime.now());
+        Request request = new Request(CommandType.RemoveGreater, e);
+        request.addCookie("UserId", CookieStorage.cookies.get("UserId"));
+        Connection.getConnection().send(request);
+        Response response = Connection.getConnection().receive();
+        MusicCollection collection = (MusicCollection) response.getBody();
+        CollectionManager.getManager().setCollection(collection);
     }
 
     public static void updateElement(MusicBand e) {
