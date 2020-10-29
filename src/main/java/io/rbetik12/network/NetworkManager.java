@@ -69,6 +69,13 @@ public class NetworkManager {
 
     public static void removeLower(MusicBand e) {
         System.out.println("Remove lower: " + e);
+        e.setCreationDate(ZonedDateTime.now());
+        Request request = new Request(CommandType.RemoveLower, e);
+        request.addCookie("UserId", CookieStorage.cookies.get("UserId"));
+        Connection.getConnection().send(request);
+        Response response = Connection.getConnection().receive();
+        MusicCollection collection = (MusicCollection) response.getBody();
+        CollectionManager.getManager().setCollection(collection);
     }
 
     public static void removeGreater(MusicBand e) {

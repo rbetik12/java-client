@@ -6,5 +6,7 @@ public enum CommandType {
     OpenConnection,
     UpdateElement,
     RemoveElement,
-    AddIfMin
+    AddIfMin,
+    RemoveLower,
+    RemoveGreater
 }

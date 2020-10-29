@@ -47,12 +47,12 @@ public class MusicQueue implements MusicCollection, Serializable {
     }
 
     @Override
-    public void removeGreater(MusicBand e) {
+    public void removeGreater(MusicBand e, int userId) {
 
     }
 
     @Override
-    public void removeLower(MusicBand e) {
+    public void removeLower(MusicBand e, int userId) {
 
     }
 
