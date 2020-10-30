@@ -104,6 +104,7 @@ public class ObjectsPanel extends JPanel {
             int x = e.getCoordinates().getX().intValue();
             int y = e.getCoordinates().getY().intValue();
 
+            System.out.println(e.getId());
             if (mouseX >= x && mouseX <= x + squareW && mouseY > y && mouseY <= y + squareH)
                 return e;
         }

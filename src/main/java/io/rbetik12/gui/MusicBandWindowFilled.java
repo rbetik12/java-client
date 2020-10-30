@@ -12,11 +12,11 @@ import java.awt.event.ActionListener;
 
 public class MusicBandWindowFilled extends MusicBandWindow {
 
-    final private MusicBand band;
+    final private MusicBand bandParam;
 
     public MusicBandWindowFilled(MusicBand e) {
         super();
-        band = e;
+        bandParam = e;
         init();
     }
 
@@ -31,7 +31,7 @@ public class MusicBandWindowFilled extends MusicBandWindow {
         nameField.setMaximumSize(
                 new Dimension(Integer.MAX_VALUE, nameField.getPreferredSize().height));
         nameField.setEditable(true);
-        nameField.setText(band.getName());
+        nameField.setText(bandParam.getName());
         add(nameField);
 
         JLabel xLabel = new JLabel("X");
@@ -43,7 +43,7 @@ public class MusicBandWindowFilled extends MusicBandWindow {
         xField.setColumns(4);
         xField.setEditable(true);
         xField.setMaximumSize(new Dimension(Integer.MAX_VALUE, xField.getPreferredSize().height));
-        xField.setValue(band.getCoordinates().getX());
+        xField.setValue(bandParam.getCoordinates().getX());
         add(xField);
 
         JLabel yLabel = new JLabel("Y");
@@ -55,7 +55,7 @@ public class MusicBandWindowFilled extends MusicBandWindow {
         yField.setColumns(4);
         yField.setEditable(true);
         yField.setMaximumSize(new Dimension(Integer.MAX_VALUE, yField.getPreferredSize().height));
-        yField.setValue(band.getCoordinates().getY());
+        yField.setValue(bandParam.getCoordinates().getY());
         add(yField);
 
         JLabel numberOfPartLabel = new JLabel("Number of participants");
@@ -67,7 +67,7 @@ public class MusicBandWindowFilled extends MusicBandWindow {
         numberOfPartField.setColumns(4);
         numberOfPartField.setEditable(true);
         numberOfPartField.setMaximumSize(new Dimension(Integer.MAX_VALUE, numberOfPartField.getPreferredSize().height));
-        numberOfPartField.setValue(band.getNumberOfParticipants());
+        numberOfPartField.setValue(bandParam.getNumberOfParticipants());
         add(numberOfPartField);
 
         JLabel musicGenreLabel = new JLabel("Band genre");
@@ -81,7 +81,7 @@ public class MusicBandWindowFilled extends MusicBandWindow {
         genreList.setMaximumSize(new Dimension(Integer.MAX_VALUE, numberOfPartField.getPreferredSize().height));
         int index = 0;
         for (int i = 0; i < genres.length; i++) {
-            if (band.getGenre().equals(getMusicGenre(genres[i])))
+            if (bandParam.getGenre().equals(getMusicGenre(genres[i])))
                 index = i;
         }
         genreList.setSelectedIndex(index);
@@ -95,7 +95,7 @@ public class MusicBandWindowFilled extends MusicBandWindow {
         label.setAlignmentX(CENTER_ALIGNMENT);
         label.setMaximumSize(
                 new Dimension(Integer.MAX_VALUE, label.getPreferredSize().height));
-        label.setText(band.getLabel().getName());
+        label.setText(bandParam.getLabel().getName());
         label.setEditable(true);
         add(label);
 
@@ -117,6 +117,7 @@ public class MusicBandWindowFilled extends MusicBandWindow {
                         null
                 );
 
+                band.setId(bandParam.getId());
                 NetworkManager.updateElement(band);
 
                 dispose();
@@ -138,6 +139,8 @@ public class MusicBandWindowFilled extends MusicBandWindow {
                         new Label(label.getText()),
                         null
                 );
+
+                band.setId(bandParam.getId());
 
                 NetworkManager.remove(band);
 

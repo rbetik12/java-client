@@ -150,9 +150,10 @@ public class NetworkManager {
 
     public static void updateElement(MusicBand e) {
         System.out.println("Updating element:" + e);
+        updateElement(e.getId(), e);
     }
 
     public static void remove(MusicBand e) {
-        System.out.println("Removed element: " + e);
+        remove(e.getId());
     }
 }
