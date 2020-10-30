@@ -16,15 +16,15 @@ public class Connection {
             ip = InetAddress.getLocalHost();
             socket = new DatagramSocket();
             buffer = new byte[256000];
+            socket.setSoTimeout(2000);
         } catch (SocketException e) {
             System.out.println("Can't create socket: " + e);
         } catch (UnknownHostException e) {
             System.out.println("Unknown host: " + e);
         }
-//        send(new Request(CommandType.OpenConnection, "Open connection"));
     }
 
-    public void send(Request request) {
+    public void send(Request request) throws SocketException {
         ByteArrayOutputStream bStream = new ByteArrayOutputStream();
         try {
             ObjectOutput oo = new ObjectOutputStream(bStream);
@@ -47,7 +47,7 @@ public class Connection {
 
     }
 
-    public Response receive() {
+    public Response receive() throws SocketException {
         DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
         try {
             socket.receive(packet);
