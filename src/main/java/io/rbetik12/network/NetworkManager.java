@@ -33,7 +33,7 @@ public class NetworkManager {
         return authResult;
     }
 
-    public static boolean Authenticate(String username, String password) {
+    public static boolean authenticate(String username, String password) {
         boolean res = sendAuth(new User(username, password));
         return res;
     }

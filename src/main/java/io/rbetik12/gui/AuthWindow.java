@@ -101,7 +101,7 @@ public class AuthWindow extends JFrame {
     }
 
     private void authenticate() {
-        if (NetworkManager.Authenticate(usernameField.getText(), String.valueOf(passwordField.getPassword()))) {
+        if (NetworkManager.authenticate(usernameField.getText(), String.valueOf(passwordField.getPassword()))) {
             errorLabel.setVisible(false);
             WindowManager.loadWindow(WindowType.Table, this);
         } else {
