@@ -5,10 +5,12 @@ import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.PriorityQueue;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Collectors;
 
 public class MusicQueue implements MusicCollection, Serializable {
     private PriorityQueue<MusicBand> queue;
+    private ReentrantLock lock;
 
     @Override
     public List<MusicBand> toList() {
