@@ -8,6 +8,17 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 
 public class WindowManager {
+    private static TableWindow tableWindow;
+    private static ObjectsWindow objectsWindow;
+
+    public static TableWindow getTableWindow() {
+        return tableWindow;
+    }
+
+    public static ObjectsWindow getObjectsWindow() {
+        return objectsWindow;
+    }
+
     public static void loadWindow(WindowType windowType) {
         openWindow(windowType);
     }
@@ -32,13 +43,13 @@ public class WindowManager {
     private static void openWindow(WindowType windowType) {
         switch (windowType) {
             case Table:
-                new TableWindow();
+                tableWindow = new TableWindow();
                 break;
             case Auth:
                 new AuthWindow();
                 break;
             case Objects:
-                new ObjectsWindow();
+                objectsWindow = new ObjectsWindow();
                 break;
             default:
                 throw new IllegalArgumentException("Window type " + windowType + " is not supported");

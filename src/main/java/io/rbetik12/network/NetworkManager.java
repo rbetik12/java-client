@@ -1,6 +1,7 @@
 package io.rbetik12.network;
 
 import io.rbetik12.collection.CollectionManager;
+import io.rbetik12.gui.WindowManager;
 import io.rbetik12.models.MusicBand;
 import io.rbetik12.models.MusicCollection;
 import io.rbetik12.models.User;
@@ -50,6 +51,7 @@ public class NetworkManager {
             }
             MusicCollection collection = (MusicCollection) response.getBody();
             CollectionManager.getManager().setCollection(collection);
+            WindowManager.getTableWindow().updateTableModel();
         } catch (SocketException exception) {
             JOptionPane.showMessageDialog(new JFrame(), "Server is down!");
         }
@@ -68,6 +70,7 @@ public class NetworkManager {
             }
             MusicCollection collection = (MusicCollection) response.getBody();
             CollectionManager.getManager().setCollection(collection);
+            WindowManager.getTableWindow().updateTableModel();
         } catch (SocketException ex) {
             JOptionPane.showMessageDialog(new JFrame(), "Server is down!");
         }
@@ -86,6 +89,7 @@ public class NetworkManager {
             }
             MusicCollection collection = (MusicCollection) response.getBody();
             CollectionManager.getManager().setCollection(collection);
+            WindowManager.getTableWindow().updateTableModel();
         } catch (SocketException ex) {
             JOptionPane.showMessageDialog(new JFrame(), "Server is down!");
         }
@@ -105,6 +109,7 @@ public class NetworkManager {
             }
             MusicCollection collection = (MusicCollection) response.getBody();
             CollectionManager.getManager().setCollection(collection);
+            WindowManager.getTableWindow().updateTableModel();
         } catch (SocketException ex) {
             JOptionPane.showMessageDialog(new JFrame(), "Server is down!");
         }
@@ -124,6 +129,7 @@ public class NetworkManager {
             }
             MusicCollection collection = (MusicCollection) response.getBody();
             CollectionManager.getManager().setCollection(collection);
+            WindowManager.getTableWindow().updateTableModel();
         } catch (SocketException ex) {
             JOptionPane.showMessageDialog(new JFrame(), "Server is down!");
         }
@@ -143,6 +149,7 @@ public class NetworkManager {
             }
             MusicCollection collection = (MusicCollection) response.getBody();
             CollectionManager.getManager().setCollection(collection);
+            WindowManager.getTableWindow().updateTableModel();
         } catch (SocketException ex) {
             JOptionPane.showMessageDialog(new JFrame(), "Server is down!");
         }
