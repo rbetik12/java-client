@@ -27,23 +27,7 @@ public class ObjectsPanel extends JPanel {
     public ObjectsPanel() {
         usersColor = new HashMap<>();
         setBorder(BorderFactory.createLineBorder(Color.black));
-        alpha = 0;
-        timer = new Timer(10, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                if (alpha < 1) {
-                    alpha += 0.01;
-                    if (alpha > 1)
-                        alpha = 1;
-                    repaint();
-                } else {
-                    timer.stop();
-                }
-            }
-        });
-
-        timer.start();
-
+        setAlphaTimer();
         addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
@@ -77,6 +61,25 @@ public class ObjectsPanel extends JPanel {
 
     public Dimension getPreferredSize() {
         return new Dimension(250, 200);
+    }
+
+    public void setAlphaTimer() {
+        alpha = 0;
+        timer = new Timer(10, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (alpha < 1) {
+                    alpha += 0.01;
+                    if (alpha > 1)
+                        alpha = 1;
+                    repaint();
+                } else {
+                    timer.stop();
+                }
+            }
+        });
+
+        timer.start();
     }
 
     public void paintComponent(Graphics g) {
@@ -116,7 +119,6 @@ public class ObjectsPanel extends JPanel {
             int x = e.getCoordinates().getX().intValue();
             int y = e.getCoordinates().getY().intValue();
 
-            System.out.println(e.getId());
             if (mouseX >= x && mouseX <= x + squareW && mouseY > y && mouseY <= y + squareH)
                 return e;
         }

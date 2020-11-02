@@ -51,7 +51,7 @@ public class NetworkManager {
             }
             MusicCollection collection = (MusicCollection) response.getBody();
             CollectionManager.getManager().setCollection(collection);
-            WindowManager.getTableWindow().updateTableModel();
+            WindowManager.updateWindows();
         } catch (SocketException exception) {
             JOptionPane.showMessageDialog(new JFrame(), "Server is down!");
         }
@@ -70,7 +70,7 @@ public class NetworkManager {
             }
             MusicCollection collection = (MusicCollection) response.getBody();
             CollectionManager.getManager().setCollection(collection);
-            WindowManager.getTableWindow().updateTableModel();
+            WindowManager.updateWindows();
         } catch (SocketException ex) {
             JOptionPane.showMessageDialog(new JFrame(), "Server is down!");
         }
@@ -89,7 +89,7 @@ public class NetworkManager {
             }
             MusicCollection collection = (MusicCollection) response.getBody();
             CollectionManager.getManager().setCollection(collection);
-            WindowManager.getTableWindow().updateTableModel();
+            WindowManager.updateWindows();
         } catch (SocketException ex) {
             JOptionPane.showMessageDialog(new JFrame(), "Server is down!");
         }
@@ -109,7 +109,7 @@ public class NetworkManager {
             }
             MusicCollection collection = (MusicCollection) response.getBody();
             CollectionManager.getManager().setCollection(collection);
-            WindowManager.getTableWindow().updateTableModel();
+            WindowManager.updateWindows();
         } catch (SocketException ex) {
             JOptionPane.showMessageDialog(new JFrame(), "Server is down!");
         }
@@ -129,7 +129,7 @@ public class NetworkManager {
             }
             MusicCollection collection = (MusicCollection) response.getBody();
             CollectionManager.getManager().setCollection(collection);
-            WindowManager.getTableWindow().updateTableModel();
+            WindowManager.updateWindows();
         } catch (SocketException ex) {
             JOptionPane.showMessageDialog(new JFrame(), "Server is down!");
         }
@@ -149,7 +149,7 @@ public class NetworkManager {
             }
             MusicCollection collection = (MusicCollection) response.getBody();
             CollectionManager.getManager().setCollection(collection);
-            WindowManager.getTableWindow().updateTableModel();
+            WindowManager.updateWindows();
         } catch (SocketException ex) {
             JOptionPane.showMessageDialog(new JFrame(), "Server is down!");
         }
@@ -158,9 +158,11 @@ public class NetworkManager {
     public static void updateElement(MusicBand e) {
         System.out.println("Updating element:" + e);
         updateElement(e.getId(), e);
+        WindowManager.updateWindows();
     }
 
     public static void remove(MusicBand e) {
         remove(e.getId());
+        WindowManager.updateWindows();
     }
 }

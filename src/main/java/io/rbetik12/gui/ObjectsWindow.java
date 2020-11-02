@@ -6,6 +6,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class ObjectsWindow extends JFrame {
+    final private ObjectsPanel objectsPanel;
 
     public ObjectsWindow() {
         super("Bands");
@@ -20,12 +21,17 @@ public class ObjectsWindow extends JFrame {
             }
         });
 
-        add(new ObjectsPanel());
+        objectsPanel = new ObjectsPanel();
+        add(objectsPanel);
 
         pack();
         setSize(800, 600);
         setFocusable(true);
         requestFocus();
         setVisible(true);
+    }
+
+    public void updateObjects() {
+        objectsPanel.setAlphaTimer();
     }
 }

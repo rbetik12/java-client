@@ -56,6 +56,13 @@ public class WindowManager {
         }
     }
 
+    public static void updateWindows() {
+        if (WindowManager.getTableWindow() != null)
+            WindowManager.getTableWindow().updateTableModel();
+        if (WindowManager.getObjectsWindow() != null)
+            WindowManager.getObjectsWindow().updateObjects();
+    }
+
     private static void OpenModalWindow(WindowType type, ActionListener actionListener) {
         switch (type) {
             default:
