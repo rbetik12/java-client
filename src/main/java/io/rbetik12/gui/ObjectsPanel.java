@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class ObjectsPanel extends JPanel {
@@ -19,11 +21,11 @@ public class ObjectsPanel extends JPanel {
     private Timer timer;
     private float alpha;
     final private Random random = new Random();
-    private int greenValue;
-    private int blueValue;
     private java.util.List<MusicBand> bands;
+    private Map<Long, Color> usersColor;
 
     public ObjectsPanel() {
+        usersColor = new HashMap<>();
         setBorder(BorderFactory.createLineBorder(Color.black));
         alpha = 0;
         timer = new Timer(10, new ActionListener() {
@@ -85,11 +87,21 @@ public class ObjectsPanel extends JPanel {
 
         bands = BandsManager.getBands();
         for (MusicBand e : bands) {
-            greenValue = random.nextInt() % 255;
-            if (greenValue < 0) greenValue = greenValue + 255;
-            blueValue = random.nextInt() % 255;
-            if (blueValue < 0) blueValue = blueValue + 255;
-            g.setColor(new Color((e.getAuthor().getId() + 128) % 255 / 256f, greenValue / 256f, blueValue / 256f));
+            if (usersColor.containsKey(e.getAuthor().getId())) {
+                g.setColor(usersColor.get(e.getAuthor().getId()));
+            } else {
+                float blueValue = random.nextInt() % 255;
+                blueValue = blueValue < 0 ? blueValue + 255 : blueValue;
+                blueValue /= 256;
+
+                float greenValue = random.nextInt() % 255;
+                greenValue = greenValue < 0 ? greenValue + 255 : greenValue;
+                greenValue /= 256;
+
+                Color color = new Color(100 / 256f, blueValue, greenValue);
+                usersColor.put(e.getAuthor().getId(), color);
+                g.setColor(color);
+            }
 
             g.fillRect(e.getCoordinates().getX().intValue(), e.getCoordinates().getY().intValue(), squareW, squareH);
 
