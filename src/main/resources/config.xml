@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<translation>
+    <auth>
+        <russian>
+            <username-string>Имя пользователя</username-string>
+            <password-string>Пароль</password-string>
+            <submit-string>Отправить</submit-string>
+            <close-string>Закрыть</close-string>
+            <error-string>Ошибка!</error-string>
+        </russian>
+        <swedish>
+            <username-string>Användarnamn</username-string>
+            <password-string>Lösenord</password-string>
+            <submit-string>Skicka in</submit-string>
+            <close-string>Stänga</close-string>
+            <error-string>Fel!</error-string>
+        </swedish>
+        <deutsche>
+            <username-string>Nutzername</username-string>
+            <password-string>Passwort</password-string>
+            <submit-string>Einreichen</submit-string>
+            <close-string>Schließen</close-string>
+            <error-string>Error!</error-string>
+        </deutsche>
+        <english>
+            <username-string>Username</username-string>
+            <password-string>Password</password-string>
+            <submit-string>Submit</submit-string>
+            <close-string>Close</close-string>
+            <error-string>Error!</error-string>
+        </english>
+    </auth>
+</translation>
